@@ -65,6 +65,7 @@ namespace ug {
                                 .add_method("set_error_estimator", &TLimexFactory::set_error_estimator, "None", "initial time","set t0 as initial time")
                                 .add_method("attach_observer", &TLimexFactory::attach_observer, "None", "end time", "set tN as endtime")
                                 .add_method("create_time_integrator", &TLimexFactory::create_time_integrator, "","number of timesteps", "set N as number of timesteps")
+                                .add_method("create_leve_time_integrator", &TLimexFactory::create_level_time_integrator, "","number of timesteps", "set N as number of timesteps")
                                 .set_construct_as_smart_pointer(true);
                         reg.add_class_to_group(name_gf, "LimexFactory", tag);
                     }
@@ -84,6 +85,7 @@ namespace ug {
                                 .add_method("set_reduction_factor", &TBraidGridFunctionBase::set_reduction_factor,"None", "t0#tN#N", "sets tstart, tstop, number of timesteps")
                                         //.add_method("setDomainDisc", &TBraidGridFunctionBase::setDomainDisc, "None", "domain discretization","set the domain")
                                 .add_method("create_time_integrator", &TBraidGridFunctionBase::create_time_integrator, "None", "Gridfunction u0","set the vector for t=t0")
+                                .add_method("create_level_time_integrator", &TBraidGridFunctionBase::create_level_time_integrator, "None", "Gridfunction u0","set the vector for t=t0")
 
                                 .set_construct_as_smart_pointer(true);
                         reg.add_class_to_group(name_gf, "SimpleIntegratorFactory", tag);
@@ -100,6 +102,7 @@ namespace ug {
 
                                         //.add_method("setDomainDisc", &TBraidGridFunctionBase::setDomainDisc, "None", "domain discretization","set the domain")
                                 .add_method("create_time_integrator", &TBraidGridFunctionBase::create_time_integrator, "None", "Gridfunction u0","set the vector for t=t0")
+                                .add_method("create_level_time_integrator", &TBraidGridFunctionBase::create_level_time_integrator, "None", "Gridfunction u0","set the vector for t=t0")
 
                                 .set_construct_as_smart_pointer(true);
                         reg.add_class_to_group(name_gf, "LinearTimeIntegratorFactory", tag);
@@ -116,6 +119,7 @@ namespace ug {
 
                                         //.add_method("setDomainDisc", &TBraidGridFunctionBase::setDomainDisc, "None", "domain discretization","set the domain")
                                 .add_method("create_time_integrator", &TBraidGridFunctionBase::create_time_integrator, "None", "Gridfunction u0","set the vector for t=t0")
+                                .add_method("create_level_time_integrator", &TBraidGridFunctionBase::create_level_time_integrator, "None", "Gridfunction u0","set the vector for t=t0")
                                 .add_method("set_num_steps", &TBraidGridFunctionBase::set_num_steps, "None", "Gridfunction u0","set the vector for t=t0")
 
                                 .set_construct_as_smart_pointer(true);
@@ -132,6 +136,7 @@ namespace ug {
 
                                         //.add_method("setDomainDisc", &TBraidGridFunctionBase::setDomainDisc, "None", "domain discretization","set the domain")
                                 .add_method("create_time_integrator", &TBraidGridFunctionBase::create_time_integrator, "None", "Gridfunction u0","set the vector for t=t0")
+                                .add_method("create_level_time_integrator", &TBraidGridFunctionBase::create_level_time_integrator, "None", "Gridfunction u0","set the vector for t=t0")
                                 .add_method("set_time_step_max", &TBraidGridFunctionBase::set_time_step_max, "None", "Gridfunction u0","set the vector for t=t0")
                                 .add_method("set_time_step_min", &TBraidGridFunctionBase::set_time_step_min, "None", "Gridfunction u0","set the vector for t=t0")
                                 .add_method("set_time_stepper_1", &TBraidGridFunctionBase::set_time_stepper_1, "None", "Gridfunction u0","set the vector for t=t0")
