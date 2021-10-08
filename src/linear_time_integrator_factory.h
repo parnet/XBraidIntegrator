@@ -11,74 +11,79 @@
 
 #include "../../XBraidForUG4/src/interface/integrator_factory.h"
 
+namespace ug {
 
-template<typename TDomain, typename TAlgebra>
-class LinearTimeIntegratorFactory : public IntegratorFactory<TDomain, TAlgebra>{
-public:
-    typedef typename TAlgebra::vector_type TVectorType;
+    namespace XBraidIntegrator {
+        template<typename TDomain, typename TAlgebra>
+        class LinearTimeIntegratorFactory : public ug::XBraidForUG4::IntegratorFactory<TDomain, TAlgebra> {
+        public:
+            typedef typename TAlgebra::vector_type TVectorType;
 
-    typedef ug::ITimeIntegrator<TDomain, TAlgebra> TTimeIntegrator;
-    typedef SmartPtr<TTimeIntegrator> SPTimeIntegrator;
+            typedef ug::ITimeIntegrator<TDomain, TAlgebra> TTimeIntegrator;
+            typedef SmartPtr <TTimeIntegrator> SPTimeIntegrator;
 
-    typedef ug::ITimeIntegratorObserver<TDomain, TAlgebra> TObserver;
-    typedef SmartPtr<TObserver> SPObserver;
+            typedef ug::ITimeIntegratorObserver<TDomain, TAlgebra> TObserver;
+            typedef SmartPtr <TObserver> SPObserver;
 
-    typedef ug::ISubDiagErrorEst<TVectorType> TErrorEstimator;
-    typedef SmartPtr<TErrorEstimator> SPErrorEstimator;
-
-
-    typedef ug::ILinearOperatorInverse<typename TAlgebra::vector_type> TSolverType;
-    typedef SmartPtr<TSolverType> SPSolver;
-    typedef ug::IDomainDiscretization <TAlgebra> TDomainDisc;
-    typedef SmartPtr <TDomainDisc> SPDomainDisc;
-
-    typedef ug::ITimeDiscretization<TAlgebra> TTimeDisc;
-    typedef SmartPtr<TTimeDisc> SPTimeDisc;
-
-    typedef ug::SimpleTimeIntegrator<TDomain,TAlgebra> TSimpleTimeIntegrator;
-    typedef SmartPtr<TSimpleTimeIntegrator> SPSimpleTimeIntegrator;
+            typedef ug::ISubDiagErrorEst<TVectorType> TErrorEstimator;
+            typedef SmartPtr <TErrorEstimator> SPErrorEstimator;
 
 
-    SPObserver observer;
-    SPObserver final_observer;
+            typedef ug::ILinearOperatorInverse<typename TAlgebra::vector_type> TSolverType;
+            typedef SmartPtr <TSolverType> SPSolver;
+            typedef ug::IDomainDiscretization<TAlgebra> TDomainDisc;
+            typedef SmartPtr <TDomainDisc> SPDomainDisc;
 
-    double m_reduction_factor = 0.0;
-    double m_dt_min = -1.0;
-    double m_dt_max = -1.0;
-    //SPTimeStepper m_time_stepper;
-    SPDomainDisc m_domainDisc;
-    SPSolver m_solver;
-    SPTimeDisc  m_time_disc;
+            typedef ug::ITimeDiscretization<TAlgebra> TTimeDisc;
+            typedef SmartPtr <TTimeDisc> SPTimeDisc;
+
+            typedef ug::SimpleTimeIntegrator<TDomain, TAlgebra> TSimpleTimeIntegrator;
+            typedef SmartPtr <TSimpleTimeIntegrator> SPSimpleTimeIntegrator;
 
 
-    LinearTimeIntegratorFactory() : IntegratorFactory<TDomain, TAlgebra>() {
-        this->m_name = "linear time integrator";
-    };
-    ~LinearTimeIntegratorFactory() = default;
+            SPObserver observer;
+            SPObserver final_observer;
 
-    //void set_time_stepper(SPTimeStepper time_stepper){
-    //    this->m_time_stepper = time_stepper;
-    //}
+            double m_reduction_factor = 0.0;
+            double m_dt_min = -1.0;
+            double m_dt_max = -1.0;
+            //SPTimeStepper m_time_stepper;
+            SPDomainDisc m_domainDisc;
+            SPSolver m_solver;
+            SPTimeDisc m_time_disc;
 
-    void set_time_disc(SPTimeDisc tdisc){
-        this->m_time_disc = tdisc;
-    }
 
-    void set_solver(SPSolver solver){
-        this->m_solver = solver;
-    }
+            LinearTimeIntegratorFactory() : ug::XBraidForUG4::IntegratorFactory<TDomain, TAlgebra>() {
+                this->m_name = "linear time integrator";
+            };
 
-    SPTimeIntegrator create_level_time_integrator(double current_dt, bool done, int level) override{
-        //integrator->set_tol(1e-12);
-        std::cout << "Delegating to create time integrator" << std::endl;
-        return create_time_integrator(current_dt, done);
-    }
+            ~LinearTimeIntegratorFactory() = default;
 
-    SPTimeIntegrator create_time_integrator(double current_dt, bool done) override{
-        auto integrator = make_sp(new ug::LinearTimeIntegrator<TDomain,TAlgebra>(this->m_time_disc, this->m_solver));
-        //integrator->set_tol(1e-12);
-        return integrator;
-    }
-};
+            //void set_time_stepper(SPTimeStepper time_stepper){
+            //    this->m_time_stepper = time_stepper;
+            //}
+
+            void set_time_disc(SPTimeDisc tdisc) {
+                this->m_time_disc = tdisc;
+            }
+
+            void set_solver(SPSolver solver) {
+                this->m_solver = solver;
+            }
+
+            SPTimeIntegrator create_level_time_integrator(double current_dt, bool done, int level) override {
+                //integrator->set_tol(1e-12);
+                std::cout << "Delegating to create time integrator" << std::endl;
+                return create_time_integrator(current_dt, done);
+            }
+
+            SPTimeIntegrator create_time_integrator(double current_dt, bool done) override {
+                auto integrator = make_sp(
+                        new ug::LinearTimeIntegrator<TDomain, TAlgebra>(this->m_time_disc, this->m_solver));
+                //integrator->set_tol(1e-12);
+                return integrator;
+            }
+        };
+    }}
 
 #endif //UG_PLUGIN_XBRAIDINTEGRATOR_LINEAR_TIME_INTEGRATOR_FACTORY_H

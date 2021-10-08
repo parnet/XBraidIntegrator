@@ -51,7 +51,7 @@ namespace ug {
                     }
 
                     {
-                        typedef IntegratorFactory<TDomain,TAlgebra> TIntegratorFactory;
+                        typedef ug::XBraidForUG4::IntegratorFactory<TDomain,TAlgebra> TIntegratorFactory;
                         typedef LimexFactory<TDomain, TAlgebra> TLimexFactory;
                         string name_gf = string("LimexFactory").append(suffix);
                         reg.add_class_<TLimexFactory,TIntegratorFactory>(name_gf, grp) // todo constructor set by executor
@@ -73,7 +73,7 @@ namespace ug {
 
                     // SimpleIntegratorFactory
                     {
-                        typedef IntegratorFactory<TDomain,TAlgebra> TIntegratorFactory;
+                        typedef ug::XBraidForUG4::IntegratorFactory<TDomain,TAlgebra> TIntegratorFactory;
                         typedef SimpleIntegratorFactory<TDomain, TAlgebra> TBraidGridFunctionBase;
                         string name_gf = string("SimpleIntegratorFactory").append(suffix);
                         reg.add_class_<TBraidGridFunctionBase,TIntegratorFactory>(name_gf, grp) // todo constructor set by executor
@@ -92,7 +92,7 @@ namespace ug {
                     }
 
                     {
-                        typedef IntegratorFactory<TDomain,TAlgebra> TIntegratorFactory;
+                        typedef ug::XBraidForUG4::IntegratorFactory<TDomain,TAlgebra> TIntegratorFactory;
                         typedef LinearTimeIntegratorFactory<TDomain, TAlgebra> TBraidGridFunctionBase;
                         string name_gf = string("LinearTimeIntegratorFactory").append(suffix);
                         reg.add_class_<TBraidGridFunctionBase,TIntegratorFactory>(name_gf, grp) // todo constructor set by executor
@@ -109,7 +109,7 @@ namespace ug {
                     }
 
                     {
-                        typedef IntegratorFactory<TDomain,TAlgebra> TIntegratorFactory;
+                        typedef ug::XBraidForUG4::IntegratorFactory<TDomain,TAlgebra> TIntegratorFactory;
                         typedef ConstStepLinearTimeIntegratorFactory<TDomain, TAlgebra> TBraidGridFunctionBase;
                         string name_gf = string("ConstStepLinearTimeIntegratorFactory").append(suffix);
                         reg.add_class_<TBraidGridFunctionBase,TIntegratorFactory>(name_gf, grp) // todo constructor set by executor
@@ -126,7 +126,7 @@ namespace ug {
                         reg.add_class_to_group(name_gf, "ConstStepLinearTimeIntegratorFactory", tag);
                     }
                     {
-                        typedef IntegratorFactory<TDomain,TAlgebra> TIntegratorFactory;
+                        typedef ug::XBraidForUG4::IntegratorFactory<TDomain,TAlgebra> TIntegratorFactory;
                         typedef TimeIntegratorLinearAdaptiveFactory<TDomain, TAlgebra> TBraidGridFunctionBase;
                         string name_gf = string("TimeIntegratorLinearAdaptiveFactory").append(suffix);
                         reg.add_class_<TBraidGridFunctionBase,TIntegratorFactory>(name_gf, grp) // todo constructor set by executor
