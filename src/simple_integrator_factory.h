@@ -89,9 +89,9 @@ namespace ug {
                 auto integrator = make_sp(new ug::SimpleTimeIntegrator<TDomain, TAlgebra>(time_stepper));
                 integrator->set_solver(this->m_solver);
                 integrator->set_time_step(current_dt);
-                integrator->set_dt_min(current_dt);
-                integrator->set_dt_max(current_dt);
-                //integrator->set_tol(1e-12);
+                integrator->set_dt_min(m_dt_min);
+                integrator->set_dt_max(m_dt_max);
+                //integrator->set_tol(1e-8);
                 return integrator;
             }
         };

@@ -44,11 +44,7 @@ namespace ug {
             SPObserver observer;
             SPObserver final_observer;
 
-            double m_reduction_factor = 0.0;
-            double m_dt_min = -1.0;
-            double m_dt_max = -1.0;
             //SPTimeStepper m_time_stepper;
-            SPDomainDisc m_domainDisc;
             SPSolver m_solver;
             SPTimeDisc m_time_disc;
 
@@ -80,7 +76,8 @@ namespace ug {
             SPTimeIntegrator create_time_integrator(double current_dt, bool done) override {
                 auto integrator = make_sp(
                         new ug::LinearTimeIntegrator<TDomain, TAlgebra>(this->m_time_disc, this->m_solver));
-                //integrator->set_tol(1e-12);
+                integrator->set_time_step(current_dt);
+
                 return integrator;
             }
         };

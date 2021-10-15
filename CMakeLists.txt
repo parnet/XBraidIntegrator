@@ -34,6 +34,6 @@ else (buildEmbeddedPlugins)
     #MESSAGE(${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
     # add_dependencies(${pluginName} UG_PLUGIN_Limex)
     target_link_libraries(${pluginName} XBraidForUG4)
-    target_link_libraries(${pluginName} Limex)
+    target_link_libraries(${pluginName} XBraidLimex)
 endif (buildEmbeddedPlugins)
 
