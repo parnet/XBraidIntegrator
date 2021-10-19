@@ -55,9 +55,6 @@ namespace ug {
 
             ~LinearTimeIntegratorFactory() = default;
 
-            //void set_time_stepper(SPTimeStepper time_stepper){
-            //    this->m_time_stepper = time_stepper;
-            //}
 
             void set_time_disc(SPTimeDisc tdisc) {
                 this->m_time_disc = tdisc;
